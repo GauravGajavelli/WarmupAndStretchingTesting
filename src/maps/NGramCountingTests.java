@@ -12,12 +12,15 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import testSupport.LoggingExtension;
+
 /**
  * Tests NGramCounting.
  * 
  * @author Nate Chenette.
  */
 
+@ExtendWith(LoggingExtension.class)
 public class NGramCountingTests {
 	private static int points = 0;
 

@@ -6,10 +6,13 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import testSupport.LoggingExtension;
+
 /**
  * Tests {@link SortedLinkedList}.
  */
 
+@ExtendWith(LoggingExtension.class)
 public class SortedLinkedListTests {
 
 	private static int points = 0;

@@ -10,6 +10,9 @@ import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import testSupport.LoggingExtension;
 
 
 /**
@@ -17,6 +20,8 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Curt Clifton
  */
+
+@ExtendWith(LoggingExtension.class)
 public class DoublyLinkedListTest {
 
 	private DoublyLinkedList<String> empty;

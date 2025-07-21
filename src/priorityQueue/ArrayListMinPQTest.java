@@ -10,12 +10,15 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import testSupport.LoggingExtension;
+
 /**
  * Test cases.
  * 
  * @author Matt Boutell. Created March 29, 2014.
  */
 
+@ExtendWith(LoggingExtension.class)
 public class ArrayListMinPQTest {
 
 	private static int points = 0; 

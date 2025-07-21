@@ -14,7 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import testSupport.LoggingExtension;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@ExtendWith(LoggingExtension.class)
 public class EfficientSearchTest {
 
 	private int[] smallArray; 

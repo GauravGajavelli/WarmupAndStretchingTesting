@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import testSupport.LoggingExtension;
 
 /**
  * Tests Anagram.
@@ -12,6 +15,7 @@ import org.junit.jupiter.api.Test;
  * @author Claude Anderson.
  */
 
+@ExtendWith(LoggingExtension.class)
 public class AnagramTests {
 	private static float points = 0;
 	
