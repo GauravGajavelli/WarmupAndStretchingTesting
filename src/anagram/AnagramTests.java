@@ -25,6 +25,7 @@ public class AnagramTests {
 	 */
 	@Test
 	public void testAnagram1() {
+//		int l = 5/0;
 		assertFalse(Anagram.isAnagram("a", "b"));
 		assertTrue(Anagram.isAnagram("a", "a"));
 		points += 0.5;
