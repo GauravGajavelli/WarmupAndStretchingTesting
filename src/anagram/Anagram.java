@@ -23,6 +23,8 @@ public class Anagram {
 	 */
 	public static boolean isAnagram(String s1, String s2) {
 //		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
+		/* Single file edit */
 		return false;
 	}
 }
+/* Multiple file edits */
