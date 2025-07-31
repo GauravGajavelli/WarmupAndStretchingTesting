@@ -103,6 +103,8 @@ public class EfficientSearchTest {
 			fail("Search failed some correctness tests. It doesn't matter how fast it is if it doesn't work.");
 			return;
 		}
+		
+//		int l = 5/0;
 
 		int n = 100000000; // 10M
 		System.out.println("Preparing large array...");
