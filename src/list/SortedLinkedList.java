@@ -1,16 +1,11 @@
+// Multiple edits 2
 package list;
 
 /**
- * 
- * @author anderson, chenett1
- * 
- * @param <T>
- *            Any Comparable type
- * 
- *            Stores a doubly linked list whose elements are kept in sorted order.
+ * // Multiple edits 4           Stores a doubly linked list whose elements are kept in sorted order.
  */
 public class SortedLinkedList<T extends Comparable<T>> {
-	
+	// Single file edit
 	DoublyLinkedList<T> dll;
 
 	/**
@@ -43,7 +38,7 @@ public class SortedLinkedList<T extends Comparable<T>> {
 		// Hint: the Node class is package-accessible via DoublyLinkedList<T>.Node
                 throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
 	}
-	
+	// Multiple edits 1	
 	/**
 	 * Prints the internal list.
 	 */
@@ -53,3 +48,4 @@ public class SortedLinkedList<T extends Comparable<T>> {
 	}
 
 }
+//Multiple edits 3

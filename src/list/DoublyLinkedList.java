@@ -10,6 +10,9 @@ import java.util.NoSuchElementException;
  *            the type of elements in the list
  */
 public class DoublyLinkedList<T extends Comparable<T>> {
+	
+	// Single file edit
+	
 	/**
 	 * This class represents a node in the list.
 	 */

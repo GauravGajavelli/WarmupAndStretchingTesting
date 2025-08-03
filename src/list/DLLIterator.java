@@ -1,3 +1,4 @@
+// Multiple edits 3// Multiple edits 4
 package list;
 
 import java.util.NoSuchElementException;
@@ -14,7 +15,7 @@ public interface DLLIterator<E> {
 	 * @return true iff the list has more elements
 	 */
 	boolean hasNext();
-
+	// Multiple edits 2
 	/**
 	 * Returns the next element in the list, if one exists.
 	 * 
@@ -24,3 +25,5 @@ public interface DLLIterator<E> {
 	 */
 	E next() throws NoSuchElementException;
 }
+
+// Multiple edits 1

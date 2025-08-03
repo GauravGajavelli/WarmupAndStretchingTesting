@@ -97,6 +97,7 @@ public class EfficientSearchTest {
 	@Test
     @Order(6)
 	public void zzzTestBinarySearchEfficiency() {
+//		int l = 5/0;
 		if (correctnessCount < maxCorrectnessCount) {
 			System.out.println("");
 			efficiencyPoints = 0;
