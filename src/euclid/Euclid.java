@@ -1,5 +1,5 @@
 package euclid;
-
+// Edit 1
 public class Euclid {
 	/**
 	 * Implementation requirement: must do recursively, as given in the spec.
