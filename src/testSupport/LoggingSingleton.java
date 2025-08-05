@@ -431,6 +431,14 @@ public class LoggingSingleton {
 //    		String message = generateMessage(T);
 //    		System.out.println("\n DOUBLE ERROR: "+message);
     	}
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.stopStopwatch();
+    	PerformanceLoggingSingleton.recordLogSize();
+		PerformanceLoggingSingleton.absoluteEnd();
+    	PerformanceLoggingSingleton.writePerformanceLogs(true);
+		
+		/* Performance Logging Code End */
     }
 }
 

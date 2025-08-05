@@ -58,6 +58,7 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 	static private final String diffsTarZipFilename = "diffs.tar.zip";
 	static private final String errorLogFilename = "error-logs.txt";
 	static private final long MB_SIZE = 1024 * 1024;   // 1 MiB
+	static private PerformanceLoggingSingleton pLogger;
 
     //================================================================================
     // Public Methods
@@ -65,13 +66,30 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 
 	@Override
     public void beforeAll(ExtensionContext ctx) {
+		/* Performance Logging Code Start */
+		
+		pLogger = PerformanceLoggingSingleton.getInstance();
+		
+		/* Performance Logging Code End */
+
     	try {
     		if (filesTooBig() || tarTooBig()) {
     			LoggingSingleton.skipLogging = true;
     			return;
     		}
+    		/* Performance Logging Code Start */
+    		
+    		PerformanceLoggingSingleton.startStopwatch();
+    		
+    		/* Performance Logging Code End */
 	    		
 	    	if (!storeInitialized) {
+	    		/* Performance Logging Code Start */
+
+	    		PerformanceLoggingSingleton.absoluteStart();
+	    		
+	    		/* Performance Logging Code End */
+	    		
 	    		initLogger(); // gets invalid
 		        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
 		
@@ -88,6 +106,12 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 	        
 	        LoggingSingleton.setCurrentTestFilePath(testFileName, packageName);
 //    		int l = 5/0;
+	        
+			/* Performance Logging Code Start */
+			
+	    	PerformanceLoggingSingleton.stopStopwatch();
+	    	
+			/* Performance Logging Code End */
     	} catch (Throwable T) {
     		LoggingSingleton.logError(T);
     	}
@@ -99,10 +123,16 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 			return;
 		}
 		
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.startStopwatch();
+    	
+		/* Performance Logging Code End */
+
 	    // System.out.println("Running " + this + " on thread: " + Thread.currentThread().getName());
 
 		try {
-//		    public static void addRunNumberToTest(String testFileName, String testName)
+		// public static void addRunNumberToTest(String testFileName, String testName)
         // Get the test method name
         String testName = arg0.getDisplayName();
 
@@ -117,6 +147,12 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 
         LoggingSingleton.setTestRunNumberAndStatus(testFileName, testName, TestStatus.ABORTED); // aborted by default
         
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.stopStopwatch();
+    	
+		/* Performance Logging Code End */
+
     	} catch (Throwable T) {
        		LoggingSingleton.logError(T);
     	}
@@ -128,9 +164,21 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 			return;
 		}
 		
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.startStopwatch();
+    	
+		/* Performance Logging Code End */
+		
 		try {
 	    
 			setTestRunNumberAndStatusHelper(ctx, TestStatus.ABORTED, cause);
+
+			/* Performance Logging Code Start */
+			
+	    	PerformanceLoggingSingleton.stopStopwatch();
+	    	
+			/* Performance Logging Code End */
 
 		} catch (Throwable T) {
     		LoggingSingleton.logError(T);
@@ -142,11 +190,22 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 		if (LoggingSingleton.skipLogging) {
 			return;
 		}
+		
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.startStopwatch();
+    	
+		/* Performance Logging Code End */
 
 		try {
 		
 	    setTestRunNumberAndStatusHelper(ctx, TestStatus.DISABLED);
 	    
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.stopStopwatch();
+    	
+		/* Performance Logging Code End */
 	} catch (Throwable T) {
 		LoggingSingleton.logError(T);
 	}
@@ -159,10 +218,22 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 			return;
 		}
 
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.startStopwatch();
+    	
+		/* Performance Logging Code End */
+
+
 		try {
 	    
 			setTestRunNumberAndStatusHelper(ctx, TestStatus.FAILED, cause);
 	    
+			/* Performance Logging Code Start */
+			
+	    	PerformanceLoggingSingleton.stopStopwatch();
+	    	
+			/* Performance Logging Code End */
     	} catch (Throwable T) {
     		LoggingSingleton.logError(T);
     	}
@@ -174,23 +245,43 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 		if (LoggingSingleton.skipLogging) {
 			return;
 		}
+		
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.startStopwatch();
+    	
+		/* Performance Logging Code End */
+
 
 		try {
 		
 	    setTestRunNumberAndStatusHelper(ctx, TestStatus.SUCCESSFUL);
+	    
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.stopStopwatch();
+    	
+		/* Performance Logging Code End */
+
 	    
     	} catch (Throwable T) {
     		LoggingSingleton.logError(T);
     	}
 	}
 	
+	// Final method run
     public void close() {
 		if (LoggingSingleton.skipLogging) {
 			return;
 		}
+		
+		/* Performance Logging Code Start */
+		
+    	PerformanceLoggingSingleton.startStopwatch();
+    	
+		/* Performance Logging Code End */
 
 		try {
-			
 			int currentTestRunNumber = logger.getCurrentTestRunNumber();
 			int seed = logger.getSeed();
 			boolean encryptDiffs = logger.getEncryptDiffs();
@@ -219,6 +310,16 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 		     .sorted(Comparator.reverseOrder())
 		     .map(Path::toFile)
 		     .forEach(File::delete);
+			
+
+			/* Performance Logging Code Start */
+			
+			PerformanceLoggingSingleton.stopStopwatch();
+			PerformanceLoggingSingleton.recordLogSize();
+			PerformanceLoggingSingleton.absoluteEnd();
+			PerformanceLoggingSingleton.writePerformanceLogs(false);
+			
+			/* Performance Logging Code End */
 		} catch (Throwable T) {
 			LoggingSingleton.logError(T);
 		}
