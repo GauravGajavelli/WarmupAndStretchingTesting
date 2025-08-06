@@ -1,5 +1,6 @@
 package maps;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,8 +25,18 @@ public class NGramCounting {
 	 * @return
 	 */
 	static Map<String,Integer> nGramCounter(String text, int n) {
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
+		Map<String,Integer> toRet = new HashMap<>();
+		if (n == 0) {
+			return toRet;
+		}
 
+		for (int i = 0; i <= text.length()-n; i++) {
+			String s = text.substring(i,i+n);
+			int f = toRet.getOrDefault(s,0)+1;
+			toRet.put(s,f);
+		}
+
+		return toRet;
 	}
 
 }

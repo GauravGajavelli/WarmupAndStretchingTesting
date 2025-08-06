@@ -8,8 +8,16 @@ public class Euclid {
 	 * @return The greatest common divisor of a and b using Euclid's recursive algorithm. 
 	 */
 	public static long gcd(long a, long b) {
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
-
+		long max = Math.max(a, b);
+		long min = Math.min(a, b);
+		a = max;
+		b = min;
+		long r = a%b;
+		
+		if (r == 0) {
+			return b;
+		}
+		
+		return gcd(b,r);
 	}
-
 }

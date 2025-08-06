@@ -1,5 +1,8 @@
 package list;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * 
  * @author anderson, chenett1
@@ -39,9 +42,25 @@ public class SortedLinkedList<T extends Comparable<T>> {
 	 * Adds the given element to the list, keeping it sorted.
 	 */
 	public void add(T element) {
-		// TODO: implement this method
-		// Hint: the Node class is package-accessible via DoublyLinkedList<T>.Node
-                throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
+		DLLIterator<T> i = this.dll.iterator(); // Creates an iterator using the factory method
+		Set<T> sorted = new TreeSet<T>();
+		
+		sorted.add(element);
+		while (i.hasNext()) {     // Note how the iterator is used
+			sorted.add(i.next());
+		}
+		
+		while (!this.dll.isEmpty()) {
+			sorted.add(this.dll.removeFirst());
+		}
+		
+		
+		DoublyLinkedList<T> newList = new DoublyLinkedList<T>();
+		for (T t:sorted) {
+			newList.addLast(t);
+		}
+		
+		this.dll = newList;
 	}
 	
 	/**

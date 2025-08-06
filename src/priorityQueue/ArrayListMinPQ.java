@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * An implementation of the Priority Queue interface using an array list.
  * 
- * @author Matt Boutell and <<TODO: Your name here>>>. Created Mar 29, 2014.
+ * @author Matt Boutell and Gaurav Gajavelli. Created Mar 29, 2014.
  * 
  * @param <T>
  *            Generic type of PQ elements
@@ -16,45 +16,48 @@ public class ArrayListMinPQ<T extends Comparable<T>> {
 	private ArrayList<T> items;
 
 	public ArrayListMinPQ() {
-		// TODO: implement
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
+		items = new ArrayList<>();
 
 	}
 
 	public T findMin() {
 		// This is also known as peekMin
-		// TODO: implement
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
+		
+		if (this.isEmpty()) {
+			return null;
+		}
+		return items.getFirst();
 
 	}
 
 	public T deleteMin() {
-		// TODO: implement
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
+		if (this.isEmpty()) {
+			return null;
+		}
+		return items.removeFirst();
 
 	}
 
 	public void insert(T item) {
-		// TODO: implement
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
-
+		for (int i = 0; i < items.size(); i++) {
+			T element = items.get(i);
+			if (item.compareTo(element) < 0) { // if we find what it's less than, it goes there
+				items.add(i, item);
+				return;
+			}
+		}
+		items.add(item);
 	}
 
 	public int size() {
-		// TODO: implement
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
-
+		return items.size();
 	}
 
 	public boolean isEmpty() {
-		// TODO: implement
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
-
+		return items.isEmpty();
 	}
 
 	public void clear() {
-		// TODO: implement
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
-
+		items.clear();
 	}
 }

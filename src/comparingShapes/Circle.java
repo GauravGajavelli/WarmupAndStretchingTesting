@@ -6,8 +6,7 @@ package comparingShapes;
  * @author Matt Boutell.
  *         Created Dec 1, 2013.
  */
-public class Circle{
-	// TODO: Make this Circle comparable to other Circles so it can be sorted. 
+public class Circle implements Comparable<Circle>{
 	// That is, implement the Comparable<Circle> interface.
 	// Implement this interface so Circle objects will sort in non-decreasing order by area of the circle
 	
@@ -47,6 +46,11 @@ public class Circle{
 		}
 		Circle other = (Circle)obj;
 		return this.radius == other.radius;
+	}
+
+	@Override
+	public int compareTo(Circle o) {
+		return Double.compare(this.area(), o.area());
 	}
 		
 }

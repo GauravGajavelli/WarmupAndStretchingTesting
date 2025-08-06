@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.HashMap;
 
 import org.junit.jupiter.api.AfterAll;
@@ -32,7 +33,7 @@ public class MapImplementationReview {
 		
 		// A HashMap is a good all-purpose map, since it is fast: O(1) search,
 		// insertion, and deletion in many situations.
-		Map<String, Integer> ages = new HashMap<>();
+		Map<String, Integer> ages = new TreeMap<>();
 		// Fill the map.
 		ages.put("Bob", 17);
 		ages.put("Shelley", 21);
@@ -50,7 +51,7 @@ public class MapImplementationReview {
 		// The test below will fail because the test is incorrect, Rhonda is not 17.
 		// Modify the test so it passes. 
 		// What we are really after is that you see how to use 'get' to retrieve data.
-		assertEquals((Integer)17, ages.get("Rhonda"));
+		assertEquals((Integer)16, ages.get("Rhonda"));
 
 		// Why does this next test fail? The map contains all the names and ages!
 		// It's because hash maps order the data using a method we'll learn
