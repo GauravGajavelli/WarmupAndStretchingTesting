@@ -5,7 +5,7 @@ package comparingShapes;
  * 
  * @author boutell. Created Dec 1, 2013.
  */
-public class Triangle {
+public class Triangle implements Comparable<Triangle> {
 	private double a, b, c; // 3 sides
 
 	/**
@@ -27,9 +27,8 @@ public class Triangle {
 	 * @return The area of this triangle.
 	 */
 	public double area() {
-		// TODO: Implement this. Hint: lookup and use Heron's formula. 
-		throw new UnsupportedOperationException("TODO: delete this statement and implement this operation.");
-
+		double s = (a+b+c)/2;
+		return Math.sqrt(s*(s-a)*(s-b)*(s-c));
 	}
 
 	/**
@@ -53,6 +52,12 @@ public class Triangle {
 		Triangle other = (Triangle)obj;
 		// CONSIDER: not very robust, but works for testing purposes. 
 		return this.a == other.a && this.b == other.b && this.c == other.c;
+	}
+
+
+	@Override
+	public int compareTo(Triangle o) {
+		return Double.compare(this.area(), o.area());
 	}
 
 	

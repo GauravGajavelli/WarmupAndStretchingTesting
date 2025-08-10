@@ -142,11 +142,14 @@ public class ShapeTest {
 		// TODO: 1 Modify the next line to create a new TreeSet - use the version
 		// of the constructor that takes a
 		// comparator, and pass the same comparator you wrote for the last test.
-		TreeSet<Triangle> triangleSet = null;
+		TreeSet<Triangle> triangleSet = new TreeSet<>();
 
 		// TODO: 2 Iterate through the unsorted triangles array, adding the
 		// triangles
 		// to the TreeSet.
+		for (Triangle t:triangles) {
+			triangleSet.add(t);
+		}
 
 		// TODO: 3 Iterate through the TreeSet using a foreach loop (Java's
 		// "enhanced" for loop) and output them. For an example of the foreach
@@ -157,6 +160,14 @@ public class ShapeTest {
 		// Challenge: You could get rid of the last character though: remember a
 		// nice string method to do this?
 
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		for (Triangle t:triangleSet) {
+			sb.append(t.toString()); // calls toString
+			sb.append(", ");
+		}
+		sb.append("]\n");
+		System.out.println(sb.toString());
 		
 		
 		// Note: the next line also prints the triangle set nicely - go,

@@ -58,7 +58,8 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 	static private final String finalTarFilename = "run.tar";
 	static private final String errorLogFilename = "error-logs.txt";
 	static private final long MB_SIZE = 1024 * 1024;   // 1 MiB
-	static private final long MAX_TIME = 500; // in milliseconds
+	static private final long KB_SIZE = 1024;   // 1 MiB
+	static private final long MAX_TIME = 5000; // in milliseconds
 
     //================================================================================
     // Public Methods (Only JUnit Callbacks)
@@ -200,6 +201,7 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
     public void close() {
 		try {
 			setUpAndCheckTiming();
+			// Thread.sleep(10000);
 
 			if (LoggingSingleton.getSkipLogging()) {
 				return;
@@ -356,6 +358,7 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
     		boolean tooManyStrikes = LoggingSingleton.tooManyStrikes();
     		if (tooManyStrikes || (timeElapsed > 5*MAX_TIME)) {
     			LoggingSingleton.setSkipLogging(true);
+    			// TODO make this deletion
     		}
         }
 		
@@ -657,7 +660,9 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 
     			LoggingSingleton.setRebaselining(false);
     			// limiting total patch size/checking for potential rebaselining
-    			if (getFilesSize(tempDiffsFolder.resolve("patches")) > (2*MB_SIZE)) {
+				long fs = getFilesSize(tempDiffsFolder.resolve("patches"));
+				LoggingSingleton.setPatchesSize(fs);
+    			if (getFilesSize(tempDiffsFolder.resolve("patches")) > (10*KB_SIZE)) {
     				LoggingSingleton.setRebaselining(true);
     			}
     	}

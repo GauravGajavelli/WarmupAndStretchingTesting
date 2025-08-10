@@ -13,11 +13,37 @@ public class EfficientSearch {
 		//
 		// You can look up binary search algorithm from the CSSE220 materials
 		// or here: https://en.wikipedia.org/wiki/Binary_search_algorithm#Procedure
-		
-		int k = 0;
-		while ((k < sortedArray.length) && (searchTerm != sortedArray[k])) {
-			k++;
+		if (sortedArray == null || sortedArray.length == 0) {
+			return -1;
 		}
-		return ((k == sortedArray.length)) ? -1 : k;
+		if (sortedArray.length == 1) {
+			return sortedArray[0] == searchTerm?0:-1;
+		}
+		return helper(0,sortedArray.length-1,searchTerm,sortedArray);
+	}
+	public static int helper(int l, int r,int searchTerm,int[] sortedArray) {
+		while (l < r) {
+			if (r-l <= 1) {
+				if (sortedArray[l] == searchTerm) {
+					return l;
+				}
+				if (sortedArray[r] == searchTerm) {
+					return r;
+				}
+
+				return -1;
+			}
+			
+			int m = (l+r)/2;
+			int mVal = sortedArray[m];
+			if (mVal == searchTerm) {
+				return m;
+			} else if (searchTerm < mVal) {
+				r = m;
+			} else {
+				l = m;
+			}
+		}
+		return -1;
 	}
 }

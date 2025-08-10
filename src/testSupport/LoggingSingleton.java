@@ -56,6 +56,7 @@ public class LoggingSingleton {
 	static private long fileSizes;
 	static private Long startTime;
 	static private long accumulatedTime = 0;
+	static private long patchesSize;
 
 	static private final String testRunInfoFilename = "testRunInfo.json";
 	static private final String errorLogFilename = "error-logs.txt";
@@ -247,6 +248,10 @@ public class LoggingSingleton {
     //================================================================================
     // Setters
     //================================================================================
+
+	public static void setPatchesSize(long p) {
+		patchesSize = p;
+	}
 
     public static void incrementRunNumber() {
     	ObjectNode incremented = (ObjectNode)LoggingSingleton.testRunInfo;
@@ -524,19 +529,18 @@ public class LoggingSingleton {
     			    StandardOpenOption.APPEND
     			);
     		atomicallySaveTempFiles();
+					/* Performance Logging Code Start */
+
+					LoggingSingleton.recordLogSize();
+					LoggingSingleton.absoluteEnd();
+					LoggingSingleton.writePerformanceLogs(true);
+					
+					/* Performance Logging Code End */
     	} catch (Throwable T) {
     		// Do nothing
 //    		String message = generateMessage(T);
 //    		System.out.println("\n DOUBLE ERROR: "+message);
     	}
-
-		/* Performance Logging Code Start */
-
-    	LoggingSingleton.recordLogSize();
-		LoggingSingleton.absoluteEnd();
-    	LoggingSingleton.writePerformanceLogs(true);
-		
-		/* Performance Logging Code End */
     }
     
 
@@ -576,6 +580,7 @@ public class LoggingSingleton {
 			String outputString = 
 					LoggingSingleton.getCurrentTestRunNumber()+(isError?"-error":"")+
 					","+logSize+
+					","+patchesSize+
 					","+LoggingSingleton.getCurrentTotalElapsedTime()+
 					","+Long.toString((absoluteEndTime-absoluteStartTime)/1000000l)+
 					",";
