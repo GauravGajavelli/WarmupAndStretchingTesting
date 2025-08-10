@@ -75,6 +75,12 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
     		}
 
 	    	if (!loggerInitialized) {
+				/* Performance Logging Code Start */
+	    		
+	    		LoggingSingleton.absoluteStart();
+	    		
+				/* Performance Logging Code End */
+	    		
 	    		initLogger(); // gets invalid
 		        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
 
@@ -236,6 +242,14 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 		     .forEach(File::delete);
 
 			// Timing check above saving test run info; otherwise strikes won't be updated
+			
+			/* Performance Logging Code Start */
+
+	    	LoggingSingleton.recordLogSize();
+			LoggingSingleton.absoluteEnd();
+	    	LoggingSingleton.writePerformanceLogs(false);
+			
+			/* Performance Logging Code End */
 		} catch (Throwable T) {
 			LoggingSingleton.logError(T);
 		}
@@ -342,7 +356,6 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
     		boolean tooManyStrikes = LoggingSingleton.tooManyStrikes();
     		if (tooManyStrikes || (timeElapsed > 5*MAX_TIME)) {
     			LoggingSingleton.setSkipLogging(true);
-    			throw new Error("Taking way too long: "+timeElapsed+" ms. Last Strike? " + tooManyStrikes);
     		}
         }
 		
