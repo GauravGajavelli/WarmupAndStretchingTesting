@@ -9,9 +9,6 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
-import testSupport.LoggingExtension;
 
 /**
  * Simple introduction or reminder about different kinds of maps.
@@ -19,8 +16,6 @@ import testSupport.LoggingExtension;
  * @author Matt Boutell
  *
  */
-
-@ExtendWith(LoggingExtension.class)
 public class MapImplementationReview {
 	private static int points = 0;
 

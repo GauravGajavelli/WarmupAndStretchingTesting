@@ -1,15 +1,13 @@
 package priorityQueue;
 
-
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import testSupport.LoggingExtension;
 
 /**
@@ -49,7 +47,7 @@ public class ArrayListMinPQTest {
 	@Test
 	public void testFindMinEmpty() {
 		ArrayListMinPQ<Integer> pq = new ArrayListMinPQ<Integer>();
-		assertNull(pq.findMin(), "Expected null, because queue is empty");
+		assertNull(pq.findMin(),"Expected null, because queue is empty");
 		points += 0;
 	}
 
@@ -87,7 +85,7 @@ public class ArrayListMinPQTest {
 	@Test
 	public void testRemoveMinEmpty() {
 		ArrayListMinPQ<Integer> pq = new ArrayListMinPQ<Integer>();
-		assertNull(pq.deleteMin(), "Expected null, because queue is empty");
+		assertNull(pq.deleteMin(),"Expected null, because queue is empty");
 		points += 0;
 	}
 
@@ -105,7 +103,7 @@ public class ArrayListMinPQTest {
 		assertEquals((Integer)10, pq.deleteMin());
 		assertEquals((Integer)12, pq.deleteMin());
 		assertEquals((Integer)15, pq.deleteMin());
-		assertNull(pq.deleteMin(), "Expected null, because queue is empty");
+		assertNull(pq.deleteMin(),"Expected null, because queue is empty");
 		points += 2;
 	}
 
@@ -126,7 +124,7 @@ public class ArrayListMinPQTest {
 		assertEquals("test", pq.deleteMin());
 		assertEquals("this", pq.deleteMin());
 		assertEquals("work", pq.deleteMin());
-		assertNull(pq.deleteMin(), "Expected null, because queue is empty");
+		assertNull("Expected null, because queue is empty",pq.deleteMin());
 		points += 2;
 	}
 
@@ -138,7 +136,7 @@ public class ArrayListMinPQTest {
 		ArrayListMinPQ<Integer> pq = new ArrayListMinPQ<Integer>();
 		assertTrue(pq.isEmpty());
 		pq.insert(10);
-		assertFalse(pq.isEmpty());
+		assertFalse(pq.isEmpty(),"Expected false");
 		points += 1;
 	}
 
