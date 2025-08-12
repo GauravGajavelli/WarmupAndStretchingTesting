@@ -14,4 +14,4 @@
 - The size of the logs (run.tar) should not exceed 10 MB
 - The latency shouldn't be exceed the 500 ms; if it does then the logger should shut down
 
-### Test Status: In Progress
+### Test Status: Passed
