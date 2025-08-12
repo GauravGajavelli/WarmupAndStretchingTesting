@@ -3,6 +3,7 @@ package testSupport;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -55,6 +56,7 @@ public class LoggingSingleton {
 	static private long fileSizes;
 	static private Long startTime;
 	static private long accumulatedTime = 0;
+	static private long patchesSize;
 
 	static private final String testRunInfoFilename = "testRunInfo.json";
 	static private final String errorLogFilename = "error-logs.txt";
@@ -246,6 +248,10 @@ public class LoggingSingleton {
     //================================================================================
     // Setters
     //================================================================================
+
+	public static void setPatchesSize(long p) {
+		patchesSize = p;
+	}
 
     public static void incrementRunNumber() {
     	ObjectNode incremented = (ObjectNode)LoggingSingleton.testRunInfo;
@@ -523,11 +529,76 @@ public class LoggingSingleton {
     			    StandardOpenOption.APPEND
     			);
     		atomicallySaveTempFiles();
+					/* Performance Logging Code Start */
+
+					LoggingSingleton.recordLogSize();
+					LoggingSingleton.absoluteEnd();
+					LoggingSingleton.writePerformanceLogs(true);
+					
+					/* Performance Logging Code End */
     	} catch (Throwable T) {
     		// Do nothing
 //    		String message = generateMessage(T);
 //    		System.out.println("\n DOUBLE ERROR: "+message);
     	}
+    }
+    
+
+    //================================================================================
+    // Performance Logging Methods
+    //================================================================================
+
+	private static long logSize;
+	private static long absoluteStartTime;
+	private static long absoluteEndTime;
+
+    public static void recordLogSize() {
+    	try {
+    		Path runTar = LoggingSingleton
+    				.filepathResolve()
+    				.resolve(finalTarFilename);
+        	
+			logSize = Files.size(runTar)/1024;
+		} catch (IOException e) {
+			logSize = -1;
+		}
+    }
+    
+    public static void absoluteStart() {
+    	absoluteStartTime = System.nanoTime();
+    }
+    
+
+    public static void absoluteEnd() {
+    	absoluteEndTime = System.nanoTime();
+    }
+    
+    public static void writePerformanceLogs(boolean isError) {
+    	final String filepath = "src/testSupport/";
+    	final String csvFilename = "performanceData.csv";
+		try {
+			String outputString = 
+					LoggingSingleton.getCurrentTestRunNumber()+(isError?"-error":"")+
+					","+logSize+
+					","+patchesSize+
+					","+LoggingSingleton.getCurrentTotalElapsedTime()+
+					","+Long.toString((absoluteEndTime-absoluteStartTime)/1000000l)+
+					",";
+			// Create file only if it doesn't exist
+			File myObj = new File(filepath + csvFilename);
+			myObj.createNewFile();
+
+			try {
+				FileOutputStream fos = new FileOutputStream(filepath + csvFilename, true);
+				outputString += "\n";
+				fos.write(outputString.getBytes());
+				fos.close();
+			} catch (Exception e) {
+				System.err.println("Could open/write/close performanceData.csv file - Ignore this error");
+			}
+		} catch (IOException e) {
+			System.err.println("Could not create performanceData.csv file - Ignore this error");
+		}
     }
 }
 

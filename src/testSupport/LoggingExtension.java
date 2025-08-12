@@ -77,6 +77,12 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
     		}
 
 	    	if (!loggerInitialized) {
+				/* Performance Logging Code Start */
+	    		
+	    		LoggingSingleton.absoluteStart();
+	    		
+				/* Performance Logging Code End */
+	    		
 	    		initLogger(); // gets invalid
 		        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
 
@@ -232,6 +238,13 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
 		     .map(Path::toFile)
 		     .forEach(File::delete);
 
+			/* Performance Logging Code Start */
+
+	    	LoggingSingleton.recordLogSize();
+			LoggingSingleton.absoluteEnd();
+	    	LoggingSingleton.writePerformanceLogs(false);
+			
+			/* Performance Logging Code End */
 			// Timing check above saving test run info; otherwise strikes won't be updated
 		} catch (Throwable T) {
 			LoggingSingleton.logError(T);
@@ -639,8 +652,11 @@ public class LoggingExtension implements TestWatcher, BeforeAllCallback, BeforeE
         		}
 
     			LoggingSingleton.setRebaselining(false);
+    			
+    			long fs = getFilesSize(tempDiffsFolder.resolve("patches"));
+    			LoggingSingleton.setPatchesSize(fs);
     			// limiting total patch size/checking for potential rebaselining
-    			if (getFilesSize(tempDiffsFolder.resolve("patches")) > (10*KB_SIZE)) {
+    			if (fs > (10*KB_SIZE)) {
     				LoggingSingleton.setRebaselining(true);
     			}
     	}
