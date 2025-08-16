@@ -15,12 +15,14 @@ Edit pattern per file
 8. Run with two separate files edited to become >5 MB
 9. Delete comments
 10. Run with no edits
+
 Outcome: Correct diffs.tar file counts and testRunInfo.json in run.tar; error-logs.txt should be empty
 ### E: Failure source pattern
 1. My code failing
 2. My/their failing - injection
 3. Their code failing
 4. No failing code
+
 Outcome: Should run normally; error-logs.txt and testRunInfo.json should be updated correctly
 
 NOTE: These tests are overlapped by rerunning each step of E for each run of C, totaling 28
