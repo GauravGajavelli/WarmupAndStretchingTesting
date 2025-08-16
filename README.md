@@ -7,6 +7,7 @@ See testRunInfo.json, diffs.tar, and error-logs.txt in run.tar
 2. Single file multiple test (one then many)
 3. Multiple files
 4. One test (many then one)
+
 Outcome: testRunInfo reflects pattern
 ### C: File edit patterns
 Edit pattern per file
@@ -20,6 +21,7 @@ Edit pattern per file
 7. Run with no edits
 8. Run with two separate files edited to become >5 MB
 9. Run with no edits
+
 Outcome: Correct diffs.tar file counts and testRunInfo.json in run.tar; error-logs.txt should be empty
 
 NOTE: These tests are overlapped by rerunning each step of B for each run, totaling 28
