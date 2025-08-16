@@ -14,6 +14,7 @@ Edit pattern per file
 8. Run with two separate files edited to become >5 MB
 9. Delete comments from two files
 10. Run with no edits
+
 Outcome: Correct diffs.tar file counts and testRunInfo.json in run.tar; error-logs.txt should be empty
 
 ### D: File churn type
@@ -24,6 +25,7 @@ File churn type
   - LargeClass2.java
 3. Different file deleted and small file edited
 4. Large files and new small file deleted
+
 Outcome: Correct diffs.tar file counts and testRunInfo.json in run.tar; error-logs.txt should be empty
 
 NOTE: These tests are overlapped by rerunning each step of D for the runs in Steps 4-10 of C, totaling 24, with 6 empty additional classes (SampleClass1-6) for deletion
