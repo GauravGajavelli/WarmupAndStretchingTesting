@@ -8,11 +8,11 @@
   - 200 bytes
   - 800 bytes
   - 3000 bytes
-  - >10000 bytes
+  - &gt;10000 bytes
 - They are added in the order by the order of run_plan.csv
 
 ### Requirements
 - The size of the logs (run.tar) should not exceed 10 MB
-- The latency shouldn't be exceed the 500 ms; if it does then the logger should shut down
+- The latency shouldn't be exceed time limits (500 ms in two of last three runs); if it does then the logger should shut down
 
 ### Test Status: Passed
