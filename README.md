@@ -13,6 +13,6 @@
 
 ### Requirements
 - The size of the logs (run.tar) should not exceed 10 MB
-- The latency shouldn't be exceed time limits (500 ms in two of last three runs); if it does then the logger should shut down
+- The latency shouldn't be exceed time limits (500 ms during tests and 3000 ms after, in two of last three runs); if it does then the logger should shut down
 
 ### Test Status: Passed
