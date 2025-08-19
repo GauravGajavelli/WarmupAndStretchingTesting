@@ -8,6 +8,6 @@
 
 ### Requirements
 - The size of the logs (run.tar) should not exceed 10 MB
-- The additional latency due to logging is below 500 ms
+- The additional run time due to logging is below 500 ms
 
 ### Test Status: Passed
